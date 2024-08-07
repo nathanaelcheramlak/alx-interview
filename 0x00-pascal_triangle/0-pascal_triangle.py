@@ -1,3 +1,9 @@
+#!/usr/bin/python3
+"""
+0. Pascal's Triangle
+"""
+
+
 def calcFactorial(num):
     if num <= 0:
         return 1
