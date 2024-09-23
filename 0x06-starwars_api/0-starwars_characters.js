@@ -1,20 +1,37 @@
 #!/usr/bin/node
 
 const request = require("request");
+const movieId = process.argv[2];
+const apiUrl = `https://swapi-api.alx-tools.com/api/films/${movieId}/`;
 
-request(
-  "https://swapi-api.hbtn.io/api/films/" + process.argv[2],
-  function (err, res, body) {
-    if (err) throw err;
-    const actors = JSON.parse(body).characters;
-    exactOrder(actors, 0);
+request(apiUrl, (error, response, body) => {
+  if (error) {
+    console.error(error);
+    return;
   }
-);
-const exactOrder = (actors, x) => {
-  if (x === actors.length) return;
-  request(actors[x], function (err, res, body) {
-    if (err) throw err;
-    console.log(JSON.parse(body).name);
-    exactOrder(actors, x + 1);
+
+  const filmData = JSON.parse(body);
+  const characters = filmData.characters;
+
+  // Fetch each character's name in order using a loop
+  printCharacters(characters, 0);
+});
+
+function printCharacters(characters, index) {
+  if (index >= characters.length) {
+    return; // End of the list, stop recursion
+  }
+
+  request(characters[index], (charError, charResponse, charBody) => {
+    if (charError) {
+      console.error(charError);
+      return;
+    }
+
+    const characterData = JSON.parse(charBody);
+    console.log(characterData.name);
+
+    // Call the function recursively for the next character
+    printCharacters(characters, index + 1);
   });
-};
+}
