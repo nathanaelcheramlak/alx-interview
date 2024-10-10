@@ -1,9 +1,12 @@
 #!/usr/bin/python3
-"""Island perimeter computing module.
+"""
+Module for island_perimeter
 """
 
+
 def island_perimeter(grid):
-    """Computes the perimeter of an island with no lakes.
+    """
+    Function that returns the perimeter of the island described in grid
     """
     n = len(grid)
     m = len(grid[0])
