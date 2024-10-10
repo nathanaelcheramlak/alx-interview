@@ -1,10 +1,9 @@
 #!/usr/bin/python3
-
+"""Island perimeter computing module.
+"""
 
 def island_perimeter(grid):
-    """
-    :type grid: List[List[int]]
-    :rtype: int
+    """Computes the perimeter of an island with no lakes.
     """
     n = len(grid)
     m = len(grid[0])
